@@ -1,0 +1,5 @@
+ray/build/*
+
+!ray/build/cubemaps
+!ray/build/json_scenes
+!ray/build/ray_scenes
