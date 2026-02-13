@@ -1,0 +1,200 @@
+[
+{
+  "directory": "/home/daniel/CS335/Project1/ray/build",
+  "command": "/usr/bin/g++  -I/usr/lib/fltk -isystem /home/daniel/CS335/Project1/ray/libs  -Wall -Wextra -Wno-unknown-pragmas -g -std=gnu++17 -o CMakeFiles/ray.dir/RayTracer.cpp.o -c /home/daniel/CS335/Project1/ray/RayTracer.cpp",
+  "file": "/home/daniel/CS335/Project1/ray/RayTracer.cpp",
+  "output": "CMakeFiles/ray.dir/RayTracer.cpp.o"
+},
+{
+  "directory": "/home/daniel/CS335/Project1/ray/build",
+  "command": "/usr/bin/g++  -I/usr/lib/fltk -isystem /home/daniel/CS335/Project1/ray/libs  -Wall -Wextra -Wno-unknown-pragmas -g -std=gnu++17 -o CMakeFiles/ray.dir/main.cpp.o -c /home/daniel/CS335/Project1/ray/main.cpp",
+  "file": "/home/daniel/CS335/Project1/ray/main.cpp",
+  "output": "CMakeFiles/ray.dir/main.cpp.o"
+},
+{
+  "directory": "/home/daniel/CS335/Project1/ray/build",
+  "command": "/usr/bin/g++  -I/usr/lib/fltk -isystem /home/daniel/CS335/Project1/ray/libs  -Wall -Wextra -Wno-unknown-pragmas -g -std=gnu++17 -o CMakeFiles/ray.dir/fileio/bitmap.cpp.o -c /home/daniel/CS335/Project1/ray/fileio/bitmap.cpp",
+  "file": "/home/daniel/CS335/Project1/ray/fileio/bitmap.cpp",
+  "output": "CMakeFiles/ray.dir/fileio/bitmap.cpp.o"
+},
+{
+  "directory": "/home/daniel/CS335/Project1/ray/build",
+  "command": "/usr/bin/g++  -I/usr/lib/fltk -isystem /home/daniel/CS335/Project1/ray/libs  -Wall -Wextra -Wno-unknown-pragmas -g -std=gnu++17 -o CMakeFiles/ray.dir/fileio/buffer.cpp.o -c /home/daniel/CS335/Project1/ray/fileio/buffer.cpp",
+  "file": "/home/daniel/CS335/Project1/ray/fileio/buffer.cpp",
+  "output": "CMakeFiles/ray.dir/fileio/buffer.cpp.o"
+},
+{
+  "directory": "/home/daniel/CS335/Project1/ray/build",
+  "command": "/usr/bin/g++  -I/usr/lib/fltk -isystem /home/daniel/CS335/Project1/ray/libs  -Wall -Wextra -Wno-unknown-pragmas -g -std=gnu++17 -o CMakeFiles/ray.dir/fileio/images.cc.o -c /home/daniel/CS335/Project1/ray/fileio/images.cc",
+  "file": "/home/daniel/CS335/Project1/ray/fileio/images.cc",
+  "output": "CMakeFiles/ray.dir/fileio/images.cc.o"
+},
+{
+  "directory": "/home/daniel/CS335/Project1/ray/build",
+  "command": "/usr/bin/g++  -I/usr/lib/fltk -isystem /home/daniel/CS335/Project1/ray/libs  -Wall -Wextra -Wno-unknown-pragmas -g -std=gnu++17 -o CMakeFiles/ray.dir/fileio/pngimage.cpp.o -c /home/daniel/CS335/Project1/ray/fileio/pngimage.cpp",
+  "file": "/home/daniel/CS335/Project1/ray/fileio/pngimage.cpp",
+  "output": "CMakeFiles/ray.dir/fileio/pngimage.cpp.o"
+},
+{
+  "directory": "/home/daniel/CS335/Project1/ray/build",
+  "command": "/usr/bin/g++  -I/usr/lib/fltk -isystem /home/daniel/CS335/Project1/ray/libs  -Wall -Wextra -Wno-unknown-pragmas -g -std=gnu++17 -o CMakeFiles/ray.dir/parser/JsonParser.cpp.o -c /home/daniel/CS335/Project1/ray/parser/JsonParser.cpp",
+  "file": "/home/daniel/CS335/Project1/ray/parser/JsonParser.cpp",
+  "output": "CMakeFiles/ray.dir/parser/JsonParser.cpp.o"
+},
+{
+  "directory": "/home/daniel/CS335/Project1/ray/build",
+  "command": "/usr/bin/g++  -I/usr/lib/fltk -isystem /home/daniel/CS335/Project1/ray/libs  -Wall -Wextra -Wno-unknown-pragmas -g -std=gnu++17 -o CMakeFiles/ray.dir/parser/Parser.cpp.o -c /home/daniel/CS335/Project1/ray/parser/Parser.cpp",
+  "file": "/home/daniel/CS335/Project1/ray/parser/Parser.cpp",
+  "output": "CMakeFiles/ray.dir/parser/Parser.cpp.o"
+},
+{
+  "directory": "/home/daniel/CS335/Project1/ray/build",
+  "command": "/usr/bin/g++  -I/usr/lib/fltk -isystem /home/daniel/CS335/Project1/ray/libs  -Wall -Wextra -Wno-unknown-pragmas -g -std=gnu++17 -o CMakeFiles/ray.dir/parser/ParserException.cpp.o -c /home/daniel/CS335/Project1/ray/parser/ParserException.cpp",
+  "file": "/home/daniel/CS335/Project1/ray/parser/ParserException.cpp",
+  "output": "CMakeFiles/ray.dir/parser/ParserException.cpp.o"
+},
+{
+  "directory": "/home/daniel/CS335/Project1/ray/build",
+  "command": "/usr/bin/g++  -I/usr/lib/fltk -isystem /home/daniel/CS335/Project1/ray/libs  -Wall -Wextra -Wno-unknown-pragmas -g -std=gnu++17 -o CMakeFiles/ray.dir/parser/Token.cpp.o -c /home/daniel/CS335/Project1/ray/parser/Token.cpp",
+  "file": "/home/daniel/CS335/Project1/ray/parser/Token.cpp",
+  "output": "CMakeFiles/ray.dir/parser/Token.cpp.o"
+},
+{
+  "directory": "/home/daniel/CS335/Project1/ray/build",
+  "command": "/usr/bin/g++  -I/usr/lib/fltk -isystem /home/daniel/CS335/Project1/ray/libs  -Wall -Wextra -Wno-unknown-pragmas -g -std=gnu++17 -o CMakeFiles/ray.dir/parser/Tokenizer.cpp.o -c /home/daniel/CS335/Project1/ray/parser/Tokenizer.cpp",
+  "file": "/home/daniel/CS335/Project1/ray/parser/Tokenizer.cpp",
+  "output": "CMakeFiles/ray.dir/parser/Tokenizer.cpp.o"
+},
+{
+  "directory": "/home/daniel/CS335/Project1/ray/build",
+  "command": "/usr/bin/g++  -I/usr/lib/fltk -isystem /home/daniel/CS335/Project1/ray/libs  -Wall -Wextra -Wno-unknown-pragmas -g -std=gnu++17 -o CMakeFiles/ray.dir/scene/bbox.cc.o -c /home/daniel/CS335/Project1/ray/scene/bbox.cc",
+  "file": "/home/daniel/CS335/Project1/ray/scene/bbox.cc",
+  "output": "CMakeFiles/ray.dir/scene/bbox.cc.o"
+},
+{
+  "directory": "/home/daniel/CS335/Project1/ray/build",
+  "command": "/usr/bin/g++  -I/usr/lib/fltk -isystem /home/daniel/CS335/Project1/ray/libs  -Wall -Wextra -Wno-unknown-pragmas -g -std=gnu++17 -o CMakeFiles/ray.dir/scene/camera.cpp.o -c /home/daniel/CS335/Project1/ray/scene/camera.cpp",
+  "file": "/home/daniel/CS335/Project1/ray/scene/camera.cpp",
+  "output": "CMakeFiles/ray.dir/scene/camera.cpp.o"
+},
+{
+  "directory": "/home/daniel/CS335/Project1/ray/build",
+  "command": "/usr/bin/g++  -I/usr/lib/fltk -isystem /home/daniel/CS335/Project1/ray/libs  -Wall -Wextra -Wno-unknown-pragmas -g -std=gnu++17 -o CMakeFiles/ray.dir/scene/cubeMap.cpp.o -c /home/daniel/CS335/Project1/ray/scene/cubeMap.cpp",
+  "file": "/home/daniel/CS335/Project1/ray/scene/cubeMap.cpp",
+  "output": "CMakeFiles/ray.dir/scene/cubeMap.cpp.o"
+},
+{
+  "directory": "/home/daniel/CS335/Project1/ray/build",
+  "command": "/usr/bin/g++  -I/usr/lib/fltk -isystem /home/daniel/CS335/Project1/ray/libs  -Wall -Wextra -Wno-unknown-pragmas -g -std=gnu++17 -o CMakeFiles/ray.dir/scene/light.cpp.o -c /home/daniel/CS335/Project1/ray/scene/light.cpp",
+  "file": "/home/daniel/CS335/Project1/ray/scene/light.cpp",
+  "output": "CMakeFiles/ray.dir/scene/light.cpp.o"
+},
+{
+  "directory": "/home/daniel/CS335/Project1/ray/build",
+  "command": "/usr/bin/g++  -I/usr/lib/fltk -isystem /home/daniel/CS335/Project1/ray/libs  -Wall -Wextra -Wno-unknown-pragmas -g -std=gnu++17 -o CMakeFiles/ray.dir/scene/material.cpp.o -c /home/daniel/CS335/Project1/ray/scene/material.cpp",
+  "file": "/home/daniel/CS335/Project1/ray/scene/material.cpp",
+  "output": "CMakeFiles/ray.dir/scene/material.cpp.o"
+},
+{
+  "directory": "/home/daniel/CS335/Project1/ray/build",
+  "command": "/usr/bin/g++  -I/usr/lib/fltk -isystem /home/daniel/CS335/Project1/ray/libs  -Wall -Wextra -Wno-unknown-pragmas -g -std=gnu++17 -o CMakeFiles/ray.dir/scene/ray.cpp.o -c /home/daniel/CS335/Project1/ray/scene/ray.cpp",
+  "file": "/home/daniel/CS335/Project1/ray/scene/ray.cpp",
+  "output": "CMakeFiles/ray.dir/scene/ray.cpp.o"
+},
+{
+  "directory": "/home/daniel/CS335/Project1/ray/build",
+  "command": "/usr/bin/g++  -I/usr/lib/fltk -isystem /home/daniel/CS335/Project1/ray/libs  -Wall -Wextra -Wno-unknown-pragmas -g -std=gnu++17 -o CMakeFiles/ray.dir/scene/scene.cpp.o -c /home/daniel/CS335/Project1/ray/scene/scene.cpp",
+  "file": "/home/daniel/CS335/Project1/ray/scene/scene.cpp",
+  "output": "CMakeFiles/ray.dir/scene/scene.cpp.o"
+},
+{
+  "directory": "/home/daniel/CS335/Project1/ray/build",
+  "command": "/usr/bin/g++  -I/usr/lib/fltk -isystem /home/daniel/CS335/Project1/ray/libs  -Wall -Wextra -Wno-unknown-pragmas -g -std=gnu++17 -o CMakeFiles/ray.dir/SceneObjects/Box.cpp.o -c /home/daniel/CS335/Project1/ray/SceneObjects/Box.cpp",
+  "file": "/home/daniel/CS335/Project1/ray/SceneObjects/Box.cpp",
+  "output": "CMakeFiles/ray.dir/SceneObjects/Box.cpp.o"
+},
+{
+  "directory": "/home/daniel/CS335/Project1/ray/build",
+  "command": "/usr/bin/g++  -I/usr/lib/fltk -isystem /home/daniel/CS335/Project1/ray/libs  -Wall -Wextra -Wno-unknown-pragmas -g -std=gnu++17 -o CMakeFiles/ray.dir/SceneObjects/Cone.cpp.o -c /home/daniel/CS335/Project1/ray/SceneObjects/Cone.cpp",
+  "file": "/home/daniel/CS335/Project1/ray/SceneObjects/Cone.cpp",
+  "output": "CMakeFiles/ray.dir/SceneObjects/Cone.cpp.o"
+},
+{
+  "directory": "/home/daniel/CS335/Project1/ray/build",
+  "command": "/usr/bin/g++  -I/usr/lib/fltk -isystem /home/daniel/CS335/Project1/ray/libs  -Wall -Wextra -Wno-unknown-pragmas -g -std=gnu++17 -o CMakeFiles/ray.dir/SceneObjects/Cylinder.cpp.o -c /home/daniel/CS335/Project1/ray/SceneObjects/Cylinder.cpp",
+  "file": "/home/daniel/CS335/Project1/ray/SceneObjects/Cylinder.cpp",
+  "output": "CMakeFiles/ray.dir/SceneObjects/Cylinder.cpp.o"
+},
+{
+  "directory": "/home/daniel/CS335/Project1/ray/build",
+  "command": "/usr/bin/g++  -I/usr/lib/fltk -isystem /home/daniel/CS335/Project1/ray/libs  -Wall -Wextra -Wno-unknown-pragmas -g -std=gnu++17 -o CMakeFiles/ray.dir/SceneObjects/Sphere.cpp.o -c /home/daniel/CS335/Project1/ray/SceneObjects/Sphere.cpp",
+  "file": "/home/daniel/CS335/Project1/ray/SceneObjects/Sphere.cpp",
+  "output": "CMakeFiles/ray.dir/SceneObjects/Sphere.cpp.o"
+},
+{
+  "directory": "/home/daniel/CS335/Project1/ray/build",
+  "command": "/usr/bin/g++  -I/usr/lib/fltk -isystem /home/daniel/CS335/Project1/ray/libs  -Wall -Wextra -Wno-unknown-pragmas -g -std=gnu++17 -o CMakeFiles/ray.dir/SceneObjects/Square.cpp.o -c /home/daniel/CS335/Project1/ray/SceneObjects/Square.cpp",
+  "file": "/home/daniel/CS335/Project1/ray/SceneObjects/Square.cpp",
+  "output": "CMakeFiles/ray.dir/SceneObjects/Square.cpp.o"
+},
+{
+  "directory": "/home/daniel/CS335/Project1/ray/build",
+  "command": "/usr/bin/g++  -I/usr/lib/fltk -isystem /home/daniel/CS335/Project1/ray/libs  -Wall -Wextra -Wno-unknown-pragmas -g -std=gnu++17 -o CMakeFiles/ray.dir/SceneObjects/trimesh.cpp.o -c /home/daniel/CS335/Project1/ray/SceneObjects/trimesh.cpp",
+  "file": "/home/daniel/CS335/Project1/ray/SceneObjects/trimesh.cpp",
+  "output": "CMakeFiles/ray.dir/SceneObjects/trimesh.cpp.o"
+},
+{
+  "directory": "/home/daniel/CS335/Project1/ray/build",
+  "command": "/usr/bin/g++  -I/usr/lib/fltk -isystem /home/daniel/CS335/Project1/ray/libs  -Wall -Wextra -Wno-unknown-pragmas -g -std=gnu++17 -o CMakeFiles/ray.dir/ui/CommandLineUI.cpp.o -c /home/daniel/CS335/Project1/ray/ui/CommandLineUI.cpp",
+  "file": "/home/daniel/CS335/Project1/ray/ui/CommandLineUI.cpp",
+  "output": "CMakeFiles/ray.dir/ui/CommandLineUI.cpp.o"
+},
+{
+  "directory": "/home/daniel/CS335/Project1/ray/build",
+  "command": "/usr/bin/g++  -I/usr/lib/fltk -isystem /home/daniel/CS335/Project1/ray/libs  -Wall -Wextra -Wno-unknown-pragmas -g -std=gnu++17 -o CMakeFiles/ray.dir/ui/CubeMapChooser.cxx.o -c /home/daniel/CS335/Project1/ray/ui/CubeMapChooser.cxx",
+  "file": "/home/daniel/CS335/Project1/ray/ui/CubeMapChooser.cxx",
+  "output": "CMakeFiles/ray.dir/ui/CubeMapChooser.cxx.o"
+},
+{
+  "directory": "/home/daniel/CS335/Project1/ray/build",
+  "command": "/usr/bin/g++  -I/usr/lib/fltk -isystem /home/daniel/CS335/Project1/ray/libs  -Wall -Wextra -Wno-unknown-pragmas -g -std=gnu++17 -o CMakeFiles/ray.dir/ui/GraphicalUI.cpp.o -c /home/daniel/CS335/Project1/ray/ui/GraphicalUI.cpp",
+  "file": "/home/daniel/CS335/Project1/ray/ui/GraphicalUI.cpp",
+  "output": "CMakeFiles/ray.dir/ui/GraphicalUI.cpp.o"
+},
+{
+  "directory": "/home/daniel/CS335/Project1/ray/build",
+  "command": "/usr/bin/g++  -I/usr/lib/fltk -isystem /home/daniel/CS335/Project1/ray/libs  -Wall -Wextra -Wno-unknown-pragmas -g -std=gnu++17 -o CMakeFiles/ray.dir/ui/ModelerCamera.cpp.o -c /home/daniel/CS335/Project1/ray/ui/ModelerCamera.cpp",
+  "file": "/home/daniel/CS335/Project1/ray/ui/ModelerCamera.cpp",
+  "output": "CMakeFiles/ray.dir/ui/ModelerCamera.cpp.o"
+},
+{
+  "directory": "/home/daniel/CS335/Project1/ray/build",
+  "command": "/usr/bin/g++  -I/usr/lib/fltk -isystem /home/daniel/CS335/Project1/ray/libs  -Wall -Wextra -Wno-unknown-pragmas -g -std=gnu++17 -o CMakeFiles/ray.dir/ui/TraceGLWindow.cpp.o -c /home/daniel/CS335/Project1/ray/ui/TraceGLWindow.cpp",
+  "file": "/home/daniel/CS335/Project1/ray/ui/TraceGLWindow.cpp",
+  "output": "CMakeFiles/ray.dir/ui/TraceGLWindow.cpp.o"
+},
+{
+  "directory": "/home/daniel/CS335/Project1/ray/build",
+  "command": "/usr/bin/g++  -I/usr/lib/fltk -isystem /home/daniel/CS335/Project1/ray/libs  -Wall -Wextra -Wno-unknown-pragmas -g -std=gnu++17 -o CMakeFiles/ray.dir/ui/TraceUI.cc.o -c /home/daniel/CS335/Project1/ray/ui/TraceUI.cc",
+  "file": "/home/daniel/CS335/Project1/ray/ui/TraceUI.cc",
+  "output": "CMakeFiles/ray.dir/ui/TraceUI.cc.o"
+},
+{
+  "directory": "/home/daniel/CS335/Project1/ray/build",
+  "command": "/usr/bin/g++  -I/usr/lib/fltk -isystem /home/daniel/CS335/Project1/ray/libs  -Wall -Wextra -Wno-unknown-pragmas -g -std=gnu++17 -o CMakeFiles/ray.dir/ui/debuggingView.cpp.o -c /home/daniel/CS335/Project1/ray/ui/debuggingView.cpp",
+  "file": "/home/daniel/CS335/Project1/ray/ui/debuggingView.cpp",
+  "output": "CMakeFiles/ray.dir/ui/debuggingView.cpp.o"
+},
+{
+  "directory": "/home/daniel/CS335/Project1/ray/build",
+  "command": "/usr/bin/g++  -I/usr/lib/fltk -isystem /home/daniel/CS335/Project1/ray/libs  -Wall -Wextra -Wno-unknown-pragmas -g -std=gnu++17 -o CMakeFiles/ray.dir/ui/debuggingWindow.cxx.o -c /home/daniel/CS335/Project1/ray/ui/debuggingWindow.cxx",
+  "file": "/home/daniel/CS335/Project1/ray/ui/debuggingWindow.cxx",
+  "output": "CMakeFiles/ray.dir/ui/debuggingWindow.cxx.o"
+},
+{
+  "directory": "/home/daniel/CS335/Project1/ray/build",
+  "command": "/usr/bin/g++  -I/usr/lib/fltk -isystem /home/daniel/CS335/Project1/ray/libs  -Wall -Wextra -Wno-unknown-pragmas -g -std=gnu++17 -o CMakeFiles/ray.dir/ui/glObjects.cpp.o -c /home/daniel/CS335/Project1/ray/ui/glObjects.cpp",
+  "file": "/home/daniel/CS335/Project1/ray/ui/glObjects.cpp",
+  "output": "CMakeFiles/ray.dir/ui/glObjects.cpp.o"
+}
+]
