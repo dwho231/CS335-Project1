@@ -1,3 +1,0 @@
-/home/daniel/CS335/Project1/ray/build/CMakeFiles/ray.dir
-/home/daniel/CS335/Project1/ray/build/CMakeFiles/edit_cache.dir
-/home/daniel/CS335/Project1/ray/build/CMakeFiles/rebuild_cache.dir
