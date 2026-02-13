@@ -151,7 +151,7 @@ bool TrimeshFace::intersectLocal(ray &r, isect &i) const {
 	const glm::dvec3 &nC = parent->normals[ic];
 	N = glm::normalize(alpha * nA + beta * nB + gamma * nC);
   } else {
-	// N = getNormal(); Causing compilation error, follow up with team
+	N = getNormal();
   }
   i.setN(N);
 

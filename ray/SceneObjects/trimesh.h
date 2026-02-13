@@ -131,7 +131,7 @@ public:
 
   int operator[](int i) const { return ids[i]; }
 
-  glm::dvec3 getNormal() { return normal; }
+  glm::dvec3 getNormal() const { return normal; }
 
   bool intersect(ray &r, isect &i) const;
   bool intersectLocal(ray &r, isect &i) const;
