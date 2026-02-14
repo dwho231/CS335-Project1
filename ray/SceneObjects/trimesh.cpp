@@ -131,7 +131,7 @@ bool TrimeshFace::intersectLocal(ray &r, isect &i) const {
   const double t = glm::dot(e2, qvec) * invDet;
 
   // Reject hits begind the ray start (or extremely close)
-  if (t < EPS)
+  if (t < 1e-9)
     return false;
 
   // We have a hit: fill intersection record

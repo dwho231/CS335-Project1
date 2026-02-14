@@ -119,9 +119,8 @@ glm::dvec3 TextureMap::getMappedValue(const glm::dvec2 &coord) const {
   double u = coord.x;
   double v = coord.y;
 
-  // Map v so that v=0 corresponds to the bottom of the image (flip Y)
   double x = u * (width - 1);
-  double y = (1.0 - v) * (height - 1);
+  double y = v * (height - 1);
 
   int x0 = static_cast<int>(floor(x));
   int y0 = static_cast<int>(floor(y));
