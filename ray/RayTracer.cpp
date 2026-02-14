@@ -235,53 +235,144 @@ void RayTracer::traceSetup(int w, int h) {
  *		h:	height of the image buffer
  *
  */
-void RayTracer::traceImage(int w, int h) {
+void RayTracer::traceImage(int w, int h) 
+{
   // Always call traceSetup before rendering anything.
   traceSetup(w, h);
 
-  // YOUR CODE HERE
-  // FIXME: Start one or more threads for ray tracing
-  //
-  // TIPS: Ideally, the traceImage should be executed asynchronously,
-  //       i.e. returns IMMEDIATELY after working threads are launched.
-  //
-  //       An asynchronous traceImage lets the GUI update your results
-  //       while rendering.
-
-  for (int i = 0; i < w; i++) {
-	for (int j = 0; j < h; j++) {
+  // Loop through every pixel and call tracePixel on it to render the entire image
+  for (int i = 0; i < w; i++) 
+  {
+	  for (int j = 0; j < h; j++) 
+    {
 		tracePixel(i, j);
-	}
+	  }
   }
-  m_bBufferReady = true;
+
+    // Triggers the image to actually show all rendered pixels (it's ready to be shown to the user)
+    m_bBufferReady = true;
 }
 
-int RayTracer::aaImage() {
-  // YOUR CODE HERE
-  // FIXME: Implement Anti-aliasing here
-  //
-  // TIP: samples and aaThresh have been synchronized with TraceUI by
-  //      RayTracer::traceSetup() function
-  return 0;
+// Implementing Adaptive Anti-Aliasing - the basic function that the UI calls when we want to do antiAliasing
+int RayTracer::aaImage() 
+{
+  
+  // Ensure we actually have a scene to perform this on to avoid problems
+  if (sceneLoaded())
+  {
+
+    // Initialize a variable for the maximum number of times we can call our recursive function (so we don't go infinitely)
+    int n = samples;
+
+    // Loop over the entire image (as we will do this for all pixels)
+    for (int i = 0; i < buffer_width; i++) 
+    {
+	    for (int j = 0; j < buffer_height; j++) 
+      {
+      // Divide the pixel into 4 rays (the corners)
+
+      /* Diagram for how a pixel gets broken up at the first stage
+    i,j+1     i+1,j+1
+      |--------|
+      | _  | _ |
+      |    |   |
+      |--------|
+    i,j      i+1,j
+      */
+
+      // p1 = left of the pixel, p2 = bottom of the pixel, p3 = right of the pixel, p4 = top of the pixel
+      double p1 = (i) / static_cast<double>(buffer_width);
+      double p2 = (j) / static_cast<double>(buffer_height);
+      double p3 = (i+1) / static_cast<double>(buffer_width);
+      double p4 = (j+1) / static_cast<double>(buffer_height);
+
+      // Call recursion to get our final pixel color, ensure that we don't go past the specificed depth the user set
+      glm::dvec3 pixelColor = subsectionsAA(p1, p2, p3, p4, n);
+      setPixel(i, j, pixelColor);
+      
+	    }
+    }
+
+    // Triggers the image to actually show all rendered pixels (it's ready to be shown to the user, now with the adaptive anti-aliasing)
+    m_bBufferReady = true;
+    return 1;
+
+  }
+
+  // The scene is not loaded so don't do anything
+  else
+  {
+    return 0;
+  }
+
 }
 
+// Implementing Adaptive Anti-Aliasing - the function we call to do recursion
+glm::dvec3 RayTracer::subsectionsAA(double s1, double s2, double s3, double s4, int depth)
+{
+
+  // Get the color of each of these pixels to determine if we will need to break it up any further
+  // (s1,s2) = bottomLeft, (s3,s2) = bottomRight, (s1,s4) = topLeft, (s3,s4) = topRight
+  glm::dvec3 bottomLeft = trace(s1,s2);
+  glm::dvec3 bottomRight = trace(s3,s2);
+  glm::dvec3 topLeft = trace(s1,s4);
+  glm::dvec3 topRight = trace(s3,s4);
+
+  // Compare the color differences to find where the greatest difference lies (ie where we need to divide more)
+  double colorDiff1 = glm::length(glm::abs(bottomLeft-bottomRight));
+  double colorDiff2 = glm::length(glm::abs(bottomLeft-topLeft));
+  double colorDiff3 = glm::length(glm::abs(bottomRight-topRight));
+
+  // The two subsections that have the greatest difference
+  double maxDiff = glm::max(colorDiff1, glm::max(colorDiff2, colorDiff3));
+
+  // Compare this difference to our threshold to determine if it's necessary to break it up further 
+  // Also ensure that we have not gone deeper than what our samples value says
+  if ((maxDiff >= aaThresh) && (depth > 0))
+  {
+    // Decrement depth since we are going one deeper
+    depth--;
+
+    /* Diagram for how a pixel gets broken up at the midpoints
+    s1,s4     s3,s4
+      |--------|
+      | _  | _ |midy
+      |    |   |
+      |--------|
+    s1,s2 midx s3,s2
+      */
+
+    // Divide each of the subsections into 4 more sections (ie - split them at the midpoints of their current positions)
+    double midX = (s1+s3)/2;
+    double midY = (s2+s4)/2;
+
+    // Call the recursive function for each of these newly broken up sections
+    glm::dvec3 final1 = subsectionsAA(s1, s2, midX, midY, depth);
+    glm::dvec3 final2 = subsectionsAA(midX, s2, s3, midY, depth);
+    glm::dvec3 final3 = subsectionsAA(s1, midY, midX, s4, depth);
+    glm::dvec3 final4 = subsectionsAA(midX, midY, s3, s4, depth);
+
+    // Return the final color based on the average of all these recursed subsections
+    glm::dvec3 subsectionPixelColor = (final1 + final2 + final3 + final4) / 4.0;
+    return subsectionPixelColor;
+  }
+
+  // Otherwise, if we have determined that we don't need to break it up any further
+  else
+  {
+    // Set the new color for that pixel to be the average color of our subsections
+    glm::dvec3 pixelColor = (bottomLeft + bottomRight + topLeft + topRight) / 4.0;
+    return pixelColor;
+  }
+}
+
+// We aren't utilizing this function since we aren't using threads
 bool RayTracer::checkRender() {
-  // YOUR CODE HERE
-  // FIXME: Return true if tracing is done.
-  //        This is a helper routine for GUI.
-  //
-  // TIPS: Introduce an array to track the status of each worker thread.
-  //       This array is maintained by the worker threads.
   return true;
 }
 
+// We aren't utilizing this function since we aren't using threads
 void RayTracer::waitRender() {
-  // YOUR CODE HERE
-  // FIXME: Wait until the rendering process is done.
-  //        This function is essential if you are using an asynchronous
-  //        traceImage implementation.
-  //
-  // TIPS: Join all worker threads here.
 }
 
 

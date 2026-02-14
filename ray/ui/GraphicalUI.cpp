@@ -295,6 +295,8 @@ void GraphicalUI::cb_render(Fl_Widget *o, void *) {
     pUI->m_traceGlWindow->label(buffer);
     pUI->m_traceGlWindow->refresh();
     if (pUI->aaSwitch() && !stopTrace) {
+      // Added to ensure that despite not using threads, AA is still called
+      pUI->raytracer->aaImage(); 
       clock_t aaStart, aaTime;
       auto t_aaStart = std::chrono::high_resolution_clock::now();
       auto t_total =
