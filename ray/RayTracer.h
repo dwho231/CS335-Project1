@@ -40,6 +40,7 @@ public:
 
   void traceImage(int w, int h);
   int aaImage();
+  glm::dvec3 subsectionsAA(double s1, double s2, double s3, double s4, int depth);
   bool checkRender();
   void waitRender();
 
