@@ -20,12 +20,12 @@ glm::dvec3 CubeMap::getColor(ray r) const {
     // X
     if (dir.x > 0) {
       face = 0; // +X
-      u = -dir.z / absX;
+      u = dir.z / absX;
     } else {
       face = 1; // -X
-      u = dir.z / absX;
+      u = -dir.z / absX;
     }
-	v = -dir.y / absX;
+	v = dir.y / absX;
   } else if (absY >= absX && absY >= absZ) {
     // Y
     if (dir.y > 0) {
@@ -38,14 +38,14 @@ glm::dvec3 CubeMap::getColor(ray r) const {
 	u = dir.x / absY;
   } else {
     // Z
-    if (dir.z > 0) {
+    if (-dir.z > 0) {
       face = 4; // +Z
       u = dir.x / absZ;
     } else {
       face = 5; // -Z
       u = -dir.x / absZ;
     }
-	v = -dir.y / absZ;
+	v = dir.y / absZ;
   }
 
   // Convert u,v from [-1,1] to [0,1]
