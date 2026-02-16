@@ -109,7 +109,7 @@ glm::dvec3 RayTracer::traceRay(ray &r, const glm::dvec3 &thresh, int depth,
       if (m.Refl()) {
         glm::dvec3 d = r.getDirection();
         glm::dvec3 Rd = glm::normalize(glm::reflect(d, N));
-        ray R(Q + RAY_EPSILON * Rd, Rd, r.getAtten(), ray::REFLECTION);
+        ray R(Q, Rd, r.getAtten(), ray::REFLECTION);
         double t2;
         I += m.kr(i) * traceRay(R, thresh, depth - 1, t2);
       }
@@ -136,7 +136,7 @@ glm::dvec3 RayTracer::traceRay(ray &r, const glm::dvec3 &thresh, int depth,
         glm::dvec3 Td = glm::refract(d, Nnew, eta);
         if (glm::length(Td) > 0.0) { // Check for total internal reflection
           Td = glm::normalize(Td);
-          ray T(Q + RAY_EPSILON * Td, Td, r.getAtten(), ray::REFRACTION);
+          ray T(Q, Td, r.getAtten(), ray::REFRACTION);
           double t3;
           I += m.kt(i) * traceRay(T, thresh, depth - 1, t3);
         }
