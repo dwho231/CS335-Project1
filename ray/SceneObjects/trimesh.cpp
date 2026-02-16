@@ -95,55 +95,73 @@ bool TrimeshFace::intersectLocal(ray &r, isect &i) const {
        assign this material to the intersection.
      - If neither is true, assign the parent's material to the intersection.
   */
+  // Indices of the three vertices that form this triangle
   const int ia = (*this)[0];
   const int ib = (*this)[1];
   const int ic = (*this)[2];
 
+  // Positions of the triangle's vertices
   const glm::dvec3 &A = parent->vertices[ia];
   const glm::dvec3 &B = parent->vertices[ib];
   const glm::dvec3 &C = parent->vertices[ic];
 
+  // Ray origin and direction
   const glm::dvec3 &O = r.getPosition();
   const glm::dvec3 &D = r.getDirection();
 
+  // Edge vectors of the triangle
   const glm::dvec3 e1 = B - A;
   const glm::dvec3 e2 = C - A;
 
+  // Begin Möller–Trumbore intersection test
+  // Compute determinant to test if ray is parallel to triangle
   const glm::dvec3 pvec = glm::cross(D, e2);
   const double det = glm::dot(e1, pvec);
 
+  // Small epsilon value for numerical stability
   const double EPS = 1e-12;
+
+  // If determinant is near zero, the ray is parallel to the triangle
+  // or the triangle is degenerate
   if (fabs(det) < EPS)
-    return false; // parallel or degenerate
+    return false;
 
   const double invDet = 1.0 / det;
 
+  // Compute distance from vertex A to ray origin
   const glm::dvec3 tvec = O - A;
+
+  // Compute barycentric coordinate u and test bounds
   const double u = glm::dot(tvec, pvec) * invDet;
   if (u < 0.0 || u > 1.0)
 	return false;
 	
+  // Compute barycentric coordinate v and test bounds
   const glm::dvec3 qvec = glm::cross(tvec, e1);
   const double v = glm::dot(D, qvec) * invDet;
   if (v < 0.0 || (u + v) > 1.0)
 	return false;
 
+  // Compute ray parameter t (distance along the ray)
   const double t = glm::dot(e2, qvec) * invDet;
 
-  // Reject hits begind the ray start (or extremely close)
-  if (t < 1e-9)
+  // Reject intersections that occur behind the ray origin
+  // or extremely close to it
+  if (t < EPS)
     return false;
 
   // We have a hit: fill intersection record
   i.setT(t);
   i.setObject(parent);
 
+  // Compute full barycentric coordinates
   const double beta = u;
   const double gamma = v;
   const double alpha = 1.0 - u - v;
   i.setBary(alpha, beta, gamma);
 
-  // Normal: use per-vertex normals if available, otherwise face normal
+  // Compute surface normal
+  // Use smooth (per-vertex) normals if available; otherwise use face normal
   glm::dvec3 N;
   if (parent->vertNorms && !parent->normals.empty()) {
 	const glm::dvec3 &nA = parent->normals[ia];
@@ -155,7 +173,10 @@ bool TrimeshFace::intersectLocal(ray &r, isect &i) const {
   }
   i.setN(N);
 
-  // UV / vertex color rules
+  // Assign texture coordinates or vertex colors according to priority rules
+  // 1) If UV coordinates exist, interpolate them barycentrically
+  // 2) Else if vertex colors exist, interpolate colors and override diffuse
+  // 3) Else use the parent mesh material directly
   if (!parent->uvCoords.empty()) {
 	const glm::dvec2 &uvA = parent->uvCoords[ia];
 	const glm::dvec2 &uvB = parent->uvCoords[ib];
@@ -178,6 +199,7 @@ bool TrimeshFace::intersectLocal(ray &r, isect &i) const {
 	i.setMaterial(parent->getMaterial());
   }
 
+  // Intersection successfully processed
   return true;
 }
 
