@@ -4,8 +4,10 @@ Pink Group
 
 Compile Instructions:
   Ensure all files are correctly downloaded, including the files within scenemodels and cubemapping
+  Ensure CMake, FLTK, JPEG, ZLIB, PNG, OpenGL (GLM), and GLEW are all installed
   In the terminal, change your directory so that you are within ray/build/
-  Run "make" *
+  Run "cmake .."
+  Run "make -j" *
     * A few errors will appear, but will not hinder the build/make process
   Run "./ray"
   A UI window will now appear and will give you many options for image rendering:
