@@ -91,8 +91,59 @@ glm::dvec3 RayTracer::traceRay(ray &r, const glm::dvec3 &thresh, int depth,
     // of just returning the result of shade(), add some more steps: add in the
     // contributions from reflected and refracted rays.
 
+    // Time of flight
+    t = i.getT();
+    // Intersection Normal
+    glm::dvec3 N = i.getN();
+    // Material of the intersected object
     const Material &m = i.getMaterial();
-    colorC = m.shade(scene.get(), r, i);
+
+    // Ray intersection
+    glm::dvec3 Q = r.at(t);
+    // local shading contribution
+    glm::dvec3 I = m.shade(scene.get(), r, i);
+
+    // End recursion if depth is 0
+    if (depth > 0) {
+      // Handle reflection
+      if (m.Refl()) {
+        glm::dvec3 d = r.getDirection();
+        glm::dvec3 Rd = glm::normalize(glm::reflect(d, N));
+        ray R(Q + RAY_EPSILON * Rd, Rd, r.getAtten(), ray::REFLECTION);
+        double t2;
+        I += m.kr(i) * traceRay(R, thresh, depth - 1, t2);
+      }
+
+      // Handle refraction
+      if (m.Trans()) {
+        glm::dvec3 d = r.getDirection();
+        double n_i, n_t;
+        glm::dvec3 Nnew;
+
+        if (glm::dot(d, N) > 0.0) {
+          // Ray is inside object, going into air
+          n_i = m.index(i);
+          n_t = 1.0;
+          Nnew = -N;
+        } else {
+          // Ray is outside object, going into material
+          n_i = 1.0;
+          n_t = m.index(i);
+          Nnew = N;
+        }
+
+        double eta = n_i / n_t;
+        glm::dvec3 Td = glm::refract(d, Nnew, eta);
+        if (glm::length(Td) > 0.0) { // Check for total internal reflection
+          Td = glm::normalize(Td);
+          ray T(Q + RAY_EPSILON * Td, Td, r.getAtten(), ray::REFRACTION);
+          double t3;
+          I += m.kt(i) * traceRay(T, thresh, depth - 1, t3);
+        }
+      }
+    }
+
+    colorC = I;
   } else {
     // No intersection. This ray travels to infinity, so we color
     // it according to the background color, which in this (simple)
