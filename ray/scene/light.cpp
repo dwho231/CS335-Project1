@@ -14,16 +14,35 @@ double DirectionalLight::distanceAttenuation(const glm::dvec3 &) const {
 }
 
 glm::dvec3 DirectionalLight::shadowAttenuation(const ray &r, const glm::dvec3 &p) const {
-  // YOUR CODE HERE:
-
-  isect i;
-  ray shadowRay(r);
-  if (scene->intersect(shadowRay, i)&& i.getT() > RAY_EPSILON){ 
-	// The point is in shadow, return the attenuation factor
-  //should fix the self shadow issue by checking the intersect point. 
-	return glm::dvec3(0.0,0.0,0.0); 
+  // Transparent shadow attenuation: accumulate transmissivity along the shadow ray
+  glm::dvec3 lightDir = -orientation; // Direction from the point to the light source
+  glm::dvec3 attenuation(1.0, 1.0, 1.0);
+  glm::dvec3 start = p;
+  const double RAY_EPSILON = 1e-4;
+  while (true) {
+    ray shadowRay(start + RAY_EPSILON * lightDir, lightDir, glm::dvec3(1.0, 1.0, 1.0), ray::SHADOW);
+    isect i;
+    if (scene->intersect(shadowRay, i)) {
+      const Material &m = i.getMaterial();
+      if (m.Trans()) {
+        // Multiply by transmissivity and continue
+        attenuation *= m.kt(i);
+        // Move start to just past this intersection
+        start = shadowRay.at(i.getT());
+        // If attenuation is (close to) zero, return black
+        if (glm::length(attenuation) < 1e-6) {
+          return glm::dvec3(0.0, 0.0, 0.0);
+        }
+        // Continue tracing
+      } else {
+        // Opaque object blocks all light
+        return glm::dvec3(0.0, 0.0, 0.0);
+      }
+    } else {
+      // No more intersections, return accumulated attenuation
+      return attenuation;
+    }
   }
-  return glm::dvec3(1.0,1.0,1.0);
 }
 
 glm::dvec3 DirectionalLight::getColor() const { return color; }
