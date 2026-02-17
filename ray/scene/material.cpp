@@ -28,13 +28,13 @@ glm::dvec3 Material::shade(Scene *scene, const ray &r, const isect &i) const {
 
   // Debugging
   if (debugMode) {
-	cerr << "shade: surfacePoint=" << surfacePoint << " normalVector=" << normalVector << " viewDirection=" << viewDirection << " kd=" << kd(i)
-	  << " ks=" << ks(i) << " ke=" << ke(i) << " ka=" << ka(i) << "\n";
+    cerr << "shade: surfacePoint=" << surfacePoint << " normalVector=" << normalVector << " viewDirection=" << viewDirection << " kd=" << kd(i)
+         << " ks=" << ks(i) << " ke=" << ke(i) << " ka=" << ka(i) << "\n";
   }
 
   // Loop through all the lights in the scene and add their contributions
   for (const auto &pLight : scene->getAllLights()) {
-    glm::dvec3 lightDirection = pLight->getDirection(surfacePoint);
+    glm::dvec3 lightDirection = glm::normalize(pLight->getDirection(surfacePoint));
     glm::dvec3 lightColor = pLight->getColor();
     double distAtt = pLight->distanceAttenuation(surfacePoint);
 
@@ -42,29 +42,32 @@ glm::dvec3 Material::shade(Scene *scene, const ray &r, const isect &i) const {
     ray shadowRay(surfacePoint + normalVector * RAY_EPSILON, lightDirection, glm::dvec3(1.0), ray::SHADOW);
     glm::dvec3 shadowAtt = pLight->shadowAttenuation(shadowRay, surfacePoint);
 
-    // Get the diffuse contribution using the Phong model
+    // Get the diffuse contribution
     double diffuseValue = max(0.0, glm::dot(normalVector, lightDirection));
     if (diffuseValue > 0.0) {
       glm::dvec3 diffuse = kd(i) * lightColor * diffuseValue;
-      glm::dvec3 halfwayVector = glm::normalize(lightDirection + viewDirection);
 
-      // Get the specular contribution using the Phong model
-      double specularValue = max(0.0, glm::dot(normalVector, halfwayVector));
+      // Get the reflection vector for Phong specular
+      glm::dvec3 reflectDirection = glm::reflect(-lightDirection, normalVector);
+
+      // Get the specular contribution
+      double specularValue = max(0.0, glm::dot(reflectDirection, viewDirection));
       glm::dvec3 specular = ks(i) * lightColor * pow(specularValue, shininess(i));
 
       // Debugging
       if (debugMode) {
-      cerr << " light: lightDirection= " << lightDirection << " color= " << lightColor << " distAtt= " << distAtt << " shadowAtt= "
-          << shadowAtt << " nDotL= " << diffuseValue << " nDotH= " << specularValue << "\n";
+        cerr << " light: lightDirection= " << lightDirection << " color= " << lightColor << " distAtt= " << distAtt << " shadowAtt= "
+             << shadowAtt << " nDotL= " << diffuseValue << " rDotV= " << specularValue << "\n";
       }
 
       // Add the diffuse and specular contributions, and multiply them by the 2 attenuations multiplied together
       glm::dvec3 combinedAtt = shadowAtt * distAtt;
       color += (diffuse + specular) * combinedAtt;
     }
-    }
-    // Clamp the color to the correct range
-    return glm::clamp(color, glm::dvec3(0.0), glm::dvec3(1.0));
+  }
+
+  // Clamp the color to the correct range
+  return glm::clamp(color, glm::dvec3(0.0), glm::dvec3(1.0));
 }
 
 TextureMap::TextureMap(string filename) {
