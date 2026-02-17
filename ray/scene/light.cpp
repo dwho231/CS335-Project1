@@ -17,12 +17,12 @@ glm::dvec3 DirectionalLight::shadowAttenuation(const ray &r, const glm::dvec3 &p
   // YOUR CODE HERE:
 
   isect i;
-  if (scene->intersect(r, i)&& i.getT() > RAY_EPSILON){ 
+  if (scene->intersect(r, i)&& i.getT() > RAY_EPSILON){ {
 	// The point is in shadow, return the attenuation factor
   //should fix the self shadow issue by checking the intersect point. 
-	return glm::dvec3(0.0); 
+	return glm::dvec3(0.0,0.0,0.0); 
   }
-  return glm::dvec3(1.0);
+  return glm::dvec3(1.0,1.0,1.0);
 }
 
 glm::dvec3 DirectionalLight::getColor() const { return color; }
@@ -50,6 +50,7 @@ double PointLight::distanceAttenuation(const glm::dvec3 &P) const {
   }
   double attenuation = 1.0 / denominator;
   return min(1.0, attenuation);
+  
 }
 
 glm::dvec3 PointLight::getColor() const { return color; }
@@ -70,11 +71,11 @@ glm::dvec3 PointLight::shadowAttenuation(const ray &r, const glm::dvec3 &p) cons
 	// Intersect is closer to light source than p, then p is in shadow.
 	if (i.getT() > RAY_EPSILON && i.getT() < lightDist) {
 		// The point is in shadow, return the attenuation factor
-		return glm::dvec3(0.0); // Fully in shadow
+		return glm::dvec3(0.0,0.0,0.0); 
 	}
   }
 
-  return glm::dvec3(1.0);
+  return glm::dvec3(1.0,1.0,1.0); 
 }
 
 #define VERBOSE 0
