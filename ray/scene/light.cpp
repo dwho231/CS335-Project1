@@ -1,7 +1,9 @@
-#include <cmath>
+include <cmath>
 #include <iostream>
 
 #include "light.h"
+#include "ray.h"
+#include "scene.h"
 #include <glm/glm.hpp>
 #include <glm/gtx/io.hpp>
 
@@ -14,15 +16,14 @@ double DirectionalLight::distanceAttenuation(const glm::dvec3 &) const {
 
 glm::dvec3 DirectionalLight::shadowAttenuation(const ray &r, const glm::dvec3 &p) const {
   // YOUR CODE HERE:
-  // You should implement shadow-handling code here.
-  glm::dvec3 lightDir = -orientation; // Direction from the point to the light source
-  ray shadowRay(p, lightDir, glm::dvec3(1.0, 1.0, 1.0), ray::SHADOW);
+
   isect i;
-  if (scene->intersect(shadowRay, i)) {
+  if (scene->intersect(r, i)&& i.getT() > RAY_EPSILON){ {
 	// The point is in shadow, return the attenuation factor
-	return glm::dvec3(0.0, 0.0, 0.0); // Fully in shadow
+  //should fix the self shadow issue by checking the intersect point. 
+	return glm::dvec3(0.0); 
   }
-  return glm::dvec3(1.0, 1.0, 1.0);
+  return glm::dvec3(1.0);
 }
 
 glm::dvec3 DirectionalLight::getColor() const { return color; }
@@ -40,10 +41,15 @@ double PointLight::distanceAttenuation(const glm::dvec3 &P) const {
 
   // Compute the distance 'd' between the light source and the point P
   // Then, return the attenuation factor:
+
   // f(d) = min(1, 1/(a + b*d + c*d^2))
   double d = glm::length(position - P);
-  // Compute the attenuation factor using the formula
-  double attenuation = 1.0 / (constantTerm + linearTerm * d + quadraticTerm * d * d);
+  double denominator = constantTerm + linearTerm * d + quadraticTerm * d * d;
+  if (denominator <= 0) {
+    // do not want to divide by zero or negative values. 
+    return 1.0; 
+  }
+  double attenuation = 1.0 / denominator;
   return min(1.0, attenuation);
 }
 
@@ -56,23 +62,20 @@ glm::dvec3 PointLight::getDirection(const glm::dvec3 &P) const {
 glm::dvec3 PointLight::shadowAttenuation(const ray &r, const glm::dvec3 &p) const {
   // YOUR CODE HERE:
   // You should implement shadow-handling code here.
-  glm::dvec3 lightDir = glm::normalize(position - p);
-
-  ray shadowRay(p, lightDir, glm::dvec3(1.0, 1.0, 1.0), ray::SHADOW);
+  // to avoid self-shadowing we want it to be offset from the light source aka greater than epsilon.
 
   isect i;
-  if (scene->intersect(shadowRay, i)){
+  if (scene->intersect(r, i)){
 	// Check if the intersection is between the point and the light source
 	double lightDist = glm::length(position - p);
-	
-	if (i.getT() < lightDist) {
+	// Intersect is closer to light source than p, then p is in shadow.
+	if (i.getT() > RAY_EPSILON && i.getT() < lightDist) {
 		// The point is in shadow, return the attenuation factor
-		return glm::dvec3(0.0, 0.0, 0.0); // Fully in shadow
+		return glm::dvec3(0.0); // Fully in shadow
 	}
   }
 
-  return glm::dvec3(1, 1, 1);
+  return glm::dvec3(1.0);
 }
 
 #define VERBOSE 0
-
