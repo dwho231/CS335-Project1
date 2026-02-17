@@ -3,7 +3,6 @@
 
 #include "light.h"
 #include "ray.h"
-#include "scene.h"
 #include <glm/glm.hpp>
 #include <glm/gtx/io.hpp>
 
